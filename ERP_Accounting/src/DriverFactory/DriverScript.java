@@ -71,6 +71,14 @@ for(int j=1; j<=excel.rowCount(TCModule);j++)
 		{
 			FunctionLibrary.closeBrowser(driver);
 			test.log(LogStatus.INFO, Description);
+		}else if(Object_Type.equalsIgnoreCase("capturData"))
+		{
+			FunctionLibrary.capturData(driver, Locator_Type, Locator_Value);
+			test.log(LogStatus.INFO, Description);
+		}else if(Object_Type.equalsIgnoreCase("tableValidation"))
+		{
+			FunctionLibrary.tableValidation(driver, Test_Data);
+			test.log(LogStatus.INFO, Description);
 		}
 		//write as pass into TCModule status column
 		excel.setCellData(TCModule, j, 5, "Pass");
