@@ -80,6 +80,15 @@ for(int j=1; j<=excel.rowCount(TCModule);j++)
 			FunctionLibrary.tableValidation(driver, Test_Data);
 			test.log(LogStatus.INFO, Description);
 		}
+		else if(Object_Type.equalsIgnoreCase("stockCategories"))
+		{
+			FunctionLibrary.stockCategories(driver);
+			test.log(LogStatus.INFO, Description);
+		}else if(Object_Type.equalsIgnoreCase("stockValidation"))
+		{
+			FunctionLibrary.stockValidation(driver, Test_Data);
+			test.log(LogStatus.INFO, Description);		
+		}
 		//write as pass into TCModule status column
 		excel.setCellData(TCModule, j, 5, "Pass");
 		test.log(LogStatus.PASS, Description);

@@ -1,5 +1,6 @@
 package CommonFunLibrary;
 
+import java.awt.Desktop.Action;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -14,6 +15,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -205,6 +207,59 @@ public static void tableValidation(WebDriver driver,String columndata) throws Th
 		Thread.sleep(5000);
 		System.out.println(Exp_Data+"     "+act_data);
 		Assert.assertEquals(Exp_Data, act_data,"snumber is not matching");
+		break;
+		
+	}
+}
+/* Templates
+ * ProjectName:ERP_Stock
+ * Module Name:stockCategories
+ * TesterName:Saurabh
+ * Creation Date:
+ */
+public static void stockCategories(WebDriver driver) throws Throwable
+{
+	Actions ac=new Actions(driver);
+	WebElement stockitem=driver.findElement(By.xpath("//*[@id='mi_a_stock_items']/a"));
+	ac.moveToElement(stockitem).perform();
+	Thread.sleep(3000);
+	WebElement stockc=driver.findElement(By.xpath("//*[@id='mi_a_stock_categories']/a"));
+	ac.moveToElement(stockc).click().perform();
+}
+/* Templates
+ * ProjectName:ERP_Stock
+ * Module Name:stockValidation
+ * TesterName:Saurabh
+ * Creation Date:
+ */
+public static void stockValidation(WebDriver driver,String Exp_data) throws Throwable
+{
+	if(driver.findElement(By.xpath(PropertyFileUtil.getValueForKey("search-box1"))).isDisplayed())
+	{
+		driver.findElement(By.xpath(PropertyFileUtil.getValueForKey("search-box1"))).clear();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(PropertyFileUtil.getValueForKey("search-box1"))).sendKeys(Exp_data);
+		driver.findElement(By.xpath(PropertyFileUtil.getValueForKey("search-button1"))).click();
+		Thread.sleep(3000);
+	}else{
+		driver.findElement(By.xpath(PropertyFileUtil.getValueForKey("search-panel1"))).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(PropertyFileUtil.getValueForKey("search-box1"))).clear();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath(PropertyFileUtil.getValueForKey("search-box1"))).sendKeys(Exp_data);
+		driver.findElement(By.xpath(PropertyFileUtil.getValueForKey("search-button1"))).click();
+		Thread.sleep(3000);
+	}
+	WebElement table=driver.findElement(By.xpath(PropertyFileUtil.getValueForKey("sot-table")));
+	List<WebElement> rows=table.findElements(By.tagName("tr"));
+	System.out.println("no of rows are::"+rows.size());
+	for(int i=1;i<=rows.size()-1;i++)
+	{
+		String act_data=driver.findElement(By.xpath("//table[@id='tbl_a_stock_categorieslist']/tbody/tr[1]/td[4]/div/span/span")).getText();
+		System.out.println("no of rows are::"+rows.size());
+		Thread.sleep(5000);
+		System.out.println(Exp_data+"     "+act_data);
+		Assert.assertEquals(Exp_data, act_data,"Not Matching");
 		break;
 		
 	}
