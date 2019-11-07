@@ -255,7 +255,7 @@ public static void stockValidation(WebDriver driver,String Exp_data) throws Thro
 	System.out.println("no of rows are::"+rows.size());
 	for(int i=1;i<=rows.size()-1;i++)
 	{
-		String act_data=driver.findElement(By.xpath("//table[@id='tbl_a_stock_categorieslist']/tbody/tr[1]/td[4]/div/span/span")).getText();
+		String act_data=driver.findElement(By.xpath("//table[@id='tbl_a_stock_categorieslist']/tbody/tr["+i+"]/td[4]/div/span/span")).getText();
 		System.out.println("no of rows are::"+rows.size());
 		Thread.sleep(5000);
 		System.out.println(Exp_data+"     "+act_data);
